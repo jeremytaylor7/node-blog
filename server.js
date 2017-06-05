@@ -5,6 +5,30 @@ const app = express();
 const routeBlogPost = require('./blog-posts');
 const { BlogPosts } = require('./models');
 
+function runServer() {
+    const port = process.env.PORT || 8080;
+    return new Promise((resolve, reject) => {
+        server = app.listen(port, () => {
+            console.log(`Your app is listening on port ${port}`);
+            resolve(server);
+        }).on('error', err => {
+            reject(err)
+        });
+    });
+};
+function closeServer() {
+    return new Promise((resolve, reject) => {
+        console.log('Closing server');
+        server.close(err => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve();
+        });
+    });
+};
+
 
 BlogPosts.create('Harry Potter Snapple Facts',
     'There is a Harry Potter world in Universal Studios',
@@ -12,13 +36,11 @@ BlogPosts.create('Harry Potter Snapple Facts',
     'Jun, 1, 2017'
 );
 
-console.log(routeBlogPost.stack);
 
 app.use('/blog-posts', routeBlogPost);
 
+if (require.main === module) {
+    runServer().catch(err => console.error(err));
+};
 
-app.listen(process.env.PORT || 8080, () => {
-    console.log(`Your app is listening on port ${process.env.PORT || 8080}`);
-});
-
-
+module.exports = { app, runServer, closeServer };

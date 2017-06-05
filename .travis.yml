@@ -1,0 +1,9 @@
+language: node_js
+node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: b4T+aPnzr+T60fP6o1ZOtAF+CPE27c/Oc6I2AHczrMCEGHzP+7EnX27ZX9L8+W6MhZ4wm3o7MyCtttZpaScxPudVueCpwrNohg2tHBV6ZB9oAmNVPD3Tw+Nt1R4Cv+FCM7EjZwocpdWTDfRTrjENMo5gas8q46llcBDLnxN0vxmX6C6NMVRmrUInxNR29J4QUAApNyzDueVfhYtL9a+bW9iii6XXY2yk5ceePAYXcWFNIARmoUm60WYYvykKZSjj47OxLLQ9G1jOUaMpCL3r0K6OuczE2N47Mffwxdx8gxPoJhoaShALks44hO2pCyDYuc5rP43tHYHO3lQT+CQJc+NIrf4VJtsnWhS8bgER5O1+B7xfQiDwE4m6SRqUJ4cUnmd2EjueX6l/URbjfUW/vAn957Wrzwf3k7epYK/Ir2ZYz+46uo+lNPUG+cmw8CMHPBnVMpSu116hA9B4Y74TjATHAiUAZhqxrOB6hl/16tiWp8TRORMJPV+P+bN6fCV5l4nCmPbudpp+f8QpqCHvhflp1uAD0iI2Xp9yszzHJ39YedlcO71yDpyz48jlseEYzo2M7cK1djzQcKFopwchnnB2NYfW8L+xSCqKjJilu0EBIUaQRGQZ8/dYGL7B2wU4dlcqOHRCHrQga64bhoSD6BKUp+J+eaGepumbuZqFM+g=
+  app: enigmatic-ravine-70468
+  on:
+    repo: jeremytaylor7/node-blog

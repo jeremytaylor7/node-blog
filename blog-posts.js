@@ -25,12 +25,12 @@ router.post('/', jsonParser, (req, res) => {
             return res.status(400).send(message);
         }
     }
-    const item = BlogPosts.create(req.body.name, req.body.ingredients);
+    const item = BlogPosts.create(req.body.title, req.body.content, req.body.author, req.body.publishDate);
     res.status(201).json(item);
 });
 
 router.delete('/:id', (req, res) => {
-    Recipes.delete(req.params.id);
+    BlogPosts.delete(req.params.id);
     console.log(`Deleted Blog Post \`${req.params.ID}\``);
     res.status(204).end();
 
@@ -63,7 +63,7 @@ router.put('/:id', jsonParser, (req, res) => {
         author: req.body.author,
         publishDate: req.body.publishDate
     })
-    res.status(204).end();
+    res.json(req.body);
 })
 
 module.exports = router;
