@@ -8,7 +8,7 @@ const should = chai.should();
 chai.use(chaiHttp);
 
 
-describe('Recipes Get Request', function () {
+describe('Blog Requests', function () {
     before(function () {
         return runServer();
     });
@@ -42,13 +42,9 @@ describe('Recipes Get Request', function () {
             .post('/blog-posts')
             .send(testItem)
             .then(function (res) {
-                console.log(testItem);
                 res.should.have.status(201);
                 res.should.be.json;
                 res.body.should.be.a('object');
-                res.body.should.include.keys(
-                    'id', 'publishDate'
-                )
                 res.body.should.not.be.null;
                 res.body.should.deep.equal(Object.assign(testItem,
                     { id: res.body.id }

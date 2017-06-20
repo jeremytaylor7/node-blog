@@ -3,14 +3,29 @@
 const express = require('express');
 const app = express();
 const routeBlogPost = require('./blog-posts');
-const { BlogPosts } = require('./models');
+const mongoose = require('mongoose');
+const BlogPosts = require('./models');
+const bodyParser = require('body-parser');
+mongoose.Promise = global.Promise;
 
-function runServer() {
-    const port = process.env.PORT || 8080;
+const { PORT, DATABASE_URL } = require('./config');
+app.use(bodyParser.json());
+
+
+let server;
+
+function runServer(databaseUrl = DATABASE_URL, port = PORT) {
+
     return new Promise((resolve, reject) => {
+        mongoose.connect(databaseUrl, err => {
+            if (err) {
+                return reject(err);
+            };
+            console.log('Connected to DB!');
+        })
         server = app.listen(port, () => {
             console.log(`Your app is listening on port ${port}`);
-            resolve(server);
+            resolve();
         }).on('error', err => {
             reject(err)
         });
@@ -28,13 +43,6 @@ function closeServer() {
         });
     });
 };
-
-
-BlogPosts.create('Harry Potter Snapple Facts',
-    'There is a Harry Potter world in Universal Studios',
-    'Jeremy Taylor',
-    'Jun, 1, 2017'
-);
 
 
 app.use('/blog-posts', routeBlogPost);
