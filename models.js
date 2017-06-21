@@ -11,6 +11,6 @@ const BlogSchema = mongoose.Schema({
     content: String,
     created: String
 })
-const BlogPost = mongoose.model('blog', BlogSchema);
+const BlogPost = mongoose.model('blog-post', BlogSchema);
 
 module.exports = BlogPost;
